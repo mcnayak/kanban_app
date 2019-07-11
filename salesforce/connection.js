@@ -15,6 +15,6 @@ module.exports = nforce.createConnection({
   password: process.env.SF_PASSWORD,
   oauth: {
     access_token: process.env.SF_ACCESS_TOKEN,
-    instance_url: rocess.env.SF_INSRANCE_URL,
+    instance_url: process.env.SF_INSRANCE_URL,
   },
 });
