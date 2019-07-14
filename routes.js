@@ -4,9 +4,30 @@ const nforce = require('nforce');
 module.exports = function (app) {
   app.get("/", (req, res) => res.sendFile("./build/es6-unbundled/index.html"));
 
-  app.get('/api/tasks', function (req, res) {
-    const query = "SELECT Id, AssignedName__c, Title__c, TaskDescription__c, Status__c, DueDate__c, Color__c FROM Kanban__c";
+  app.get("/api/getcount", function (req,res){
+    const total_count= "SELECT count(Status__c) FROM Kanban__c";
+    conn.query({ total_count }, (err, data) => {
+      if (!err && data.records) {
+        res.json(data.records);
+      } else {
+        res.json(err);
+      }
+    });    
+  });
 
+  app.get("/api/getcompleted", function (req,res){
+    const completed_count = "SELECT count(Status__c) FROM  Kanban__c WHERE status__c = 'Complete'";
+    conn.query({ completed_count }, (err, data) => {
+      if (!err && data.records) {
+        res.json(data.records);
+      } else {
+        res.json(err);
+      }
+    });
+  })
+
+  app.get('/api/tasks', function (req, res) {
+  const query = "SELECT Id, AssignedName__c, Title__c, TaskDescription__c, Status__c, DueDate__c, Color__c FROM Kanban__c";
     conn.query({ query }, (err, data) => {
 
       if (!err && data.records) {
