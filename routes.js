@@ -9,6 +9,7 @@ module.exports = function (app) {
     conn.query({ total_count }, (err, data) => {
       if (!err && data.records) {
         res.json(data.records);
+        console.log(data.records);
       } else {
         res.json(err);
       }
@@ -20,12 +21,14 @@ module.exports = function (app) {
     conn.query({ completed_count }, (err, data) => {
       if (!err && data.records) {
         res.json(data.records);
+        console.log(data.records);
       } else {
         res.json(err);
       }
     });
   })
-
+  
+  
   app.get('/api/tasks', function (req, res) {
   const query = "SELECT Id, AssignedName__c, Title__c, TaskDescription__c, Status__c, DueDate__c, Color__c FROM Kanban__c";
     conn.query({ query }, (err, data) => {
