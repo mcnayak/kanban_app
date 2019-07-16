@@ -81,6 +81,7 @@ class KanbanContainer extends PolymerElement {
 
   isComplete(item) {
     return item.status__c === "Complete";
+    
   }
 
   constructor() {
