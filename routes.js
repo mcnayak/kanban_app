@@ -38,6 +38,20 @@ module.exports = function (app) {
     });
   });
 
+  app.delete('/api/tasks/:id',function(req,res){
+    const record = nforce.delete('Kanban__c');
+    conn.delete(rec, function(req,res){
+      if (!err) {
+        res.json({success:true});
+      }
+      else
+      {
+        res.json(err);
+      }
+    })
+
+  })
+
   app.post('/api/tasks', function(req, res) {
     const record = nforce.createSObject('Kanban__c');
     record.set('AssignedName__c', req.body.assignedname__c);
